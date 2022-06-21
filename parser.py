@@ -100,14 +100,14 @@ class Parser():
         self.Expr1()
         self.ExprLinha()
     def ExprLinha(self):
-        if (self.eat(Tag.OP_soma) or self.eat(Tag.OP_subtração)):
+        if (self.eat(Tag.OP_SOM) or self.eat(Tag.OP_SUB)):
             self.Expr1()
             self.ExprLinha()
     def Expr1(self):
         self.Expr2()
         self.Expr1Linha()
     def Expr1Linha(self):
-        if (self.eat(Tag.OP_multiplicação) or self.eat(Tag.OP_divisão)):
+        if (self.eat(Tag.OP_MULTI) or self.eat(Tag.OP_DIV)):
             self.Expr2()
             self.Expr1Linha()
     def Expr2(self):
