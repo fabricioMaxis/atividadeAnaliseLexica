@@ -50,6 +50,7 @@ class Parser():
 
     def Decl(self):
         if(self.eat(Tag.SMB_dois_pontos)):
+            self.token.setTipo("NUM")
             if (not self.eat(Tag.ID)):
                 self.sinalizaErroSintatico("Esperado \"ID\", encontrado " + "\"" + self.token.getLexema() + "\"")
             if (not self.eat(Tag.SMB_ponto_virgula)):
@@ -87,6 +88,8 @@ class Parser():
         elif (self.eat(Tag.KW_if)):
             self.IfStatement()
     def AssignmentStatement(self):
+            if(self.token.getTipo() != "NUM"):
+                self.sinalizaErroSintatico("ID não declarado " + "\"" + self.token.getLexema() + "\"")
             if (not self.eat(Tag.ID)):
                 self.sinalizaErroSintatico("Esperado \"ID\", encontrado " + "\"" + self.token.getLexema() + "\"")
             self.Expr()
@@ -114,6 +117,8 @@ class Parser():
         self.Term()
     def Term(self):
         if (self.eat(Tag.SMB_dois_pontos)):
+            if(self.token.getTipo() != "NUM"):
+                self.sinalizaErroSintatico("ID não declarado " + "\"" + self.token.getLexema() + "\"")
             if (not self.eat(Tag.ID)):
                 self.sinalizaErroSintatico("Esperado \"ID\", encontrado " + "\"" + self.token.getLexema() + "\"")
         elif (not self.eat(Tag.NUM)):

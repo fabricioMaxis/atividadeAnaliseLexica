@@ -1,17 +1,14 @@
-{Fabricio 
-  Matheus
-    Sunner}
 program "HelloMiniLogo"
-:var;
+
 begin
- print
+ print "movendo para frente";
  :var 10;
  forward :var;
  print "iniciando loop";
  repeat 3 do
  begin
  turn 90 degrees;
- forward var
+ forward :var
  end;
  print "fim"
 end

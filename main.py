@@ -1,9 +1,13 @@
 from tag import Tag
 from token import Token
 from lexer import Lexer
+from parser import Parser
 
 if __name__ == "__main__":
     lexer = Lexer('Teste.txt')
+    parser = Parser(lexer)
+    parser.Programa()
+
     print("\n=>Lista de tokens:")
     token = lexer.proxToken()
     

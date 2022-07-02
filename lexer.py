@@ -53,7 +53,7 @@ class Lexer():
             if (estado == 1):
                 if (c == ''):
                     return Token(Tag.EOF, "EOF", self.n_line, self.n_column)
-                elif c == ' ' or c == '\t' or c == '\n' or c == '\r':
+                elif (c == ' ' or c == '\t' or c == '\n' or c == '\r'):
                     estado = 1
                     if c == '\n':
                         self.n_line = self.n_line + 1
@@ -87,11 +87,11 @@ class Lexer():
                     lexema += c
                     estado = 3
                 elif (c == '"'):
-                    lexema += c
                     estado = 4
                 elif c == '{':
                     estado = 5   
                 else:
+                    lexema += c
                     self.sinalizaErroLexico("Caractere invalido [" + c + "] na linha " +
                                             str(self.n_line) + " e coluna " + str(self.n_column))
                     if self.totalErros == 5: 
@@ -136,7 +136,7 @@ class Lexer():
 
                     return token
             elif (estado == 4):
-                if c == '"':
+                if (c == '"'):
                     token = self.ts.getToken(lexema)
                     if (token is None):
                         token = Token(Tag.Literal, lexema, self.n_line, self.n_column)
@@ -147,7 +147,7 @@ class Lexer():
                         self.ts.updateLineColumn(lexema, self.n_line, self.n_column)
 
                     return token
-                elif c == '\n':
+                elif (c == '\n'):
                     self.sinalizaErroLexico("Caractere invalido [quebra de linha] na linha " + str(self.n_line) + " e coluna " + str(self.n_column))
 
                     if self.totalErros == 5:
@@ -159,16 +159,16 @@ class Lexer():
                         lexema = ""
                         c = '\u0000'
                         continue
-                elif c == '':
+                elif (c == ''):
                     coluna = self.n_column
                     self.n_column = 0
                     return Token(Tag.Literal, lexema, self.n_line, coluna)
-                elif c == '\t':
+                elif (c == '\t'):
                     self.n_column = self.n_column + 3
                 lexema += c
 
             elif estado == 5:
-                if c=='}':
+                if (c=='}'):
                         estado = 1
                 elif c == '\n':
                     self.n_line = self.n_line + 1
